@@ -32,7 +32,8 @@ wymaga restartu procesu sheerdns.
 %patch0 -p1
 
 %build
-%{__make}
+%{__make} \
+	CFLAGS="%{rpmcflags} -Wall -ansi -pedantic"
 
 %install
 rm -rf $RPM_BUILD_ROOT
