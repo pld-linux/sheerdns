@@ -1,5 +1,5 @@
 Summary:	SheerDNS - simple replacement master DNS
-Summary(pl):	SheerDNS - prosty "zastêpca" DNS'a nadrzednego
+Summary(pl):	SheerDNS - prosty "zastêpca" DNS-a nadrzêdnego
 Name:		sheerdns
 Version:	1.0.0
 Release:	1
@@ -10,7 +10,8 @@ Source0:	http://threading.2038bug.com/sheerdns/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-dir.patch
 URL:		http://threading.2038bug.com/sheerdns/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 Provides:       nameserver
 Obsoletes:	bind
 Obsoletes:	djbdns
@@ -18,6 +19,7 @@ Obsoletes:	pdns
 Obsoletes:	pdnsd
 Obsoletes:	dnsmasq
 Obsoletes:	maradns
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 SheerDNS was written to be a simple replacement master DNS server that
@@ -26,14 +28,13 @@ record in a small file, updating records does not require the sheerdns
 process to be notified or restarted.
 
 %description -l pl
-SheerDNS zosta³ napisany jako prosty zastêpca DNS'a nadrzêdnego, który
+SheerDNS zosta³ napisany jako prosty zastêpca DNS-a nadrzêdnego, który
 mo¿e byæ u¿ywany do automatycznych aktualizacji. Ka¿dy rekord
-przechowywany jest w ma³ym pliku, daltego te¿ aktualizacja rekordu nie
-wymaga restartu procesu sheerdns/
+przechowywany jest w ma³ym pliku, dlatego te¿ aktualizacja rekordu nie
+wymaga restartu procesu sheerdns.
 
 %prep
 %setup -q -n %{name}
-
 %patch0 -p1
 
 %build
@@ -41,17 +42,18 @@ wymaga restartu procesu sheerdns/
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d \
 	   $RPM_BUILD_ROOT%{_sbindir} \
 	   $RPM_BUILD_ROOT%{_var}/lib/%{name} \
 	   $RPM_BUILD_ROOT%{_mandir}/man8 
-	
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install sheerdns $RPM_BUILD_ROOT%{_sbindir}
 install sheerdnshash $RPM_BUILD_ROOT%{_sbindir}
 install sheerdns.8 $RPM_BUILD_ROOT%{_mandir}/man8
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add %{name}
@@ -69,13 +71,10 @@ if [ "$1" = "0" ]; then
         /sbin/chkconfig --del %{name}
 fi
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(644,root,root,755)
 %doc sheerdns.html sheerdns.ps
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) /etc/rc.d/init.d/%{name}
-%{_mandir}/man8/%{name}.8.gz
+%attr(754,root,root) /etc/rc.d/init.d/%{name}
+%{_mandir}/man8/%{name}.8*
 %{_var}/lib/%{name}
