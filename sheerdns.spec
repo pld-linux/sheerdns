@@ -13,12 +13,6 @@ URL:		http://threading.2038bug.com/sheerdns/
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Provides:       nameserver
-Obsoletes:	bind
-Obsoletes:	djbdns
-Obsoletes:	pdns
-Obsoletes:	pdnsd
-Obsoletes:	dnsmasq
-Obsoletes:	maradns
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
