@@ -2,7 +2,7 @@ Summary:	SheerDNS - simple replacement master DNS
 Summary(pl):	SheerDNS - prosty "zastêpca" DNS'a nadrzednego
 Name:		sheerdns
 Version:	1.0.0
-Release:	0.2
+Release:	1
 License:	GPL v2
 Vendor:		Paul Sheer <psheer@icon.co.za>
 Group:		Networking/Daemons
@@ -11,6 +11,13 @@ Source1:	%{name}.init
 Patch0:		%{name}-dir.patch
 URL:		http://threading.2038bug.com/sheerdns/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Provides:       nameserver
+Obsoletes:	bind
+Obsoletes:	djbdns
+Obsoletes:	pdns
+Obsoletes:	pdnsd
+Obsoletes:	dnsmasq
+Obsoletes:	maradns
 
 %description
 SheerDNS was written to be a simple replacement master DNS server that
