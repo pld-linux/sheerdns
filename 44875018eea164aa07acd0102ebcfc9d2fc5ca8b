@@ -1,0 +1,4 @@
+- secuity update to 1.0.1
+BUGz:
+ Buffer overflow in CNAME handling
+ Directory traversal in directory_lookup()
