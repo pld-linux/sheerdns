@@ -13,7 +13,7 @@ Patch0:		%{name}-dir.patch
 URL:		http://threading.2038bug.com/sheerdns/
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
-Provides:       nameserver
+Provides:	nameserver
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,7 +41,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d \
 	   $RPM_BUILD_ROOT%{_sbindir} \
 	   $RPM_BUILD_ROOT%{_var}/lib/%{name} \
-	   $RPM_BUILD_ROOT%{_mandir}/man8 
+	   $RPM_BUILD_ROOT%{_mandir}/man8
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install sheerdns $RPM_BUILD_ROOT%{_sbindir}
