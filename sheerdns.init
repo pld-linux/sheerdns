@@ -23,7 +23,7 @@ else
 	exit 0
 fi
 
-
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -36,7 +36,6 @@ case "$1" in
 	else
 		# show "%s service is already running." <service>
 		msg_already_running sheerdns
-		exit 1
 	fi
 	;;
   stop)
@@ -45,30 +44,25 @@ case "$1" in
 	if [ -f /var/lock/subsys/sheerdns ]; then
 		msg_stopping sheerdns
 		killproc sheerdns
-		RETVAL=$?
 		rm -f /var/lock/subsys/sheerdns
 	else
 		# show "%s service is not running." sheerdns
 		msg_not_running sheerdns
-		exit 1
 	fi	
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
-	;;
-  force-reload)
-	$0 stop && $0 start
 	exit $?
 	;;
   status)
 	status sheerdns
-	RETVAL=$?
+	exit $?
 	;;
   *)
-	# show "Usage: %s {start|stop|restart|reload|force-reload|status}"
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
-	exit 1
+	# show "Usage: %s {start|stop|restart|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
