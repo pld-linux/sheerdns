@@ -39,9 +39,9 @@ wymaga restartu procesu sheerdns.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d \
-	   $RPM_BUILD_ROOT%{_sbindir} \
-	   $RPM_BUILD_ROOT%{_var}/lib/%{name} \
-	   $RPM_BUILD_ROOT%{_mandir}/man8
+	$RPM_BUILD_ROOT%{_sbindir} \
+	$RPM_BUILD_ROOT%{_var}/lib/%{name} \
+	$RPM_BUILD_ROOT%{_mandir}/man8
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install sheerdns $RPM_BUILD_ROOT%{_sbindir}
@@ -54,17 +54,17 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/chkconfig --add %{name}
 if [ -f /var/lock/subsys/%{name} ]; then
-        /etc/rc.d/init.d/%{name} restart 1>&2
+	/etc/rc.d/init.d/%{name} restart 1>&2
 else
-        echo "Type \"/etc/rc.d/init.d/%{name} start\" to start %{name}." 1>&2
+	echo "Type \"/etc/rc.d/init.d/%{name} start\" to start %{name}." 1>&2
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-        if [ -f /var/lock/subsys/%{name} ]; then
-                /etc/rc.d/init.d/%{name} stop 1>&2
-        fi
-        /sbin/chkconfig --del %{name}
+	if [ -f /var/lock/subsys/%{name} ]; then
+		/etc/rc.d/init.d/%{name} stop 1>&2
+	fi
+	/sbin/chkconfig --del %{name}
 fi
 
 %files
