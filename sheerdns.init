@@ -45,7 +45,7 @@ case "$1" in
 		rm -f /var/lock/subsys/sheerdns
 	else
 		msg_not_running sheerdns
-	fi	
+	fi
 	;;
   restart|force-reload)
 	$0 stop
