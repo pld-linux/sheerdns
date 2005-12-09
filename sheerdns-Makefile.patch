@@ -1,0 +1,25 @@
+--- sheerdns/Makefile.orig	2005-12-09 21:20:33.000000000 +0100
++++ sheerdns/Makefile	2005-12-09 21:20:50.000000000 +0100
+@@ -1,4 +1,4 @@
+-
++CC=""
+ CFLAGS=-Wall -g -O0 -ansi -pedantic
+ 
+ SRCS=$(wildcard *.c)
+@@ -8,13 +8,13 @@
+ OBJECTS=$(SRCS:.c=.o)
+ 
+ sheerdns: $(OBJECTS)
+-	gcc -o sheerdns $(OBJECTS)
++	$(CC) -o sheerdns $(OBJECTS)
+ 
+ sheerdnshash: hash.c
+-	gcc $(CFLAGS) -o sheerdnshash hash.c -DSTANDALONE -Wall
++	$(CC) $(CFLAGS) -o sheerdnshash hash.c -DSTANDALONE -Wall
+ 
+ .c.o: $(SRCS)
+-	gcc $(CFLAGS) -c $<
++	$(CC) $(CFLAGS) -c $<
+ 
+ clean:
+ 	rm -f sheerdns sheerdnshash *.o
