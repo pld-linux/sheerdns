@@ -4,14 +4,14 @@ Name:		sheerdns
 Version:	1.0.1
 Release:	1
 License:	GPL v2
-Vendor:		Paul Sheer <psheer@icon.co.za>
 Group:		Networking/Daemons
 Source0:	http://threading.2038bug.com/sheerdns/%{name}-%{version}.tar.gz
 # Source0-md5:	abe66eabbd519e620e4679a2dabd93f1
 Source1:	%{name}.init
 Patch0:		%{name}-dir.patch
+Patch1:		%{name}-Makefile.patch
 URL:		http://threading.2038bug.com/sheerdns/
-PreReq:		rc-scripts
+Requires:	rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Provides:	nameserver
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -31,9 +31,11 @@ wymaga restartu procesu sheerdns.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
+	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags} -Wall -ansi -pedantic"
 
 %install
@@ -69,7 +71,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc sheerdns.html sheerdns.ps
+%doc ChangeLog sheerdns.html sheerdns.ps
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 %{_mandir}/man8/%{name}.8*
