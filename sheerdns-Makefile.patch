@@ -1,0 +1,19 @@
+--- sheerdns/Makefile.orig	2005-12-10 10:16:48.000000000 +0100
++++ sheerdns/Makefile	2005-12-10 10:17:07.000000000 +0100
+@@ -8,13 +8,13 @@
+ OBJECTS=$(SRCS:.c=.o)
+ 
+ sheerdns: $(OBJECTS)
+-	gcc -o sheerdns $(OBJECTS)
++	$(CC) -o sheerdns $(OBJECTS)
+ 
+ sheerdnshash: hash.c
+-	gcc $(CFLAGS) -o sheerdnshash hash.c -DSTANDALONE -Wall
++	$(CC) $(CFLAGS) -o sheerdnshash hash.c -DSTANDALONE -Wall
+ 
+ .c.o: $(SRCS)
+-	gcc $(CFLAGS) -c $<
++	$(CC) $(CFLAGS) -c $<
+ 
+ clean:
+ 	rm -f sheerdns sheerdnshash *.o
