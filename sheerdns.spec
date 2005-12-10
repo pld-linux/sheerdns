@@ -9,6 +9,7 @@ Source0:	http://threading.2038bug.com/sheerdns/%{name}-%{version}.tar.gz
 # Source0-md5:	abe66eabbd519e620e4679a2dabd93f1
 Source1:	%{name}.init
 Patch0:		%{name}-dir.patch
+Patch1:		%{name}-Makefile.patch
 URL:		http://threading.2038bug.com/sheerdns/
 Requires:	rc-scripts
 Requires(post,preun):	/sbin/chkconfig
@@ -30,9 +31,11 @@ wymaga restartu procesu sheerdns.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
+	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags} -Wall -ansi -pedantic"
 
 %install
