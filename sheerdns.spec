@@ -1,5 +1,5 @@
 Summary:	SheerDNS - simple replacement master DNS
-Summary(pl.UTF-8):   SheerDNS - prosty "zastępca" DNS-a nadrzędnego
+Summary(pl.UTF-8):	SheerDNS - prosty "zastępca" DNS-a nadrzędnego
 Name:		sheerdns
 Version:	1.0.1
 Release:	1
