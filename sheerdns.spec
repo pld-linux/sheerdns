@@ -1,5 +1,5 @@
 Summary:	SheerDNS - simple replacement master DNS
-Summary(pl):	SheerDNS - prosty "zastêpca" DNS-a nadrzêdnego
+Summary(pl.UTF-8):   SheerDNS - prosty "zastÄ™pca" DNS-a nadrzÄ™dnego
 Name:		sheerdns
 Version:	1.0.1
 Release:	1
@@ -22,10 +22,10 @@ can be used where atomic updates are required. Because it stores each
 record in a small file, updating records does not require the sheerdns
 process to be notified or restarted.
 
-%description -l pl
-SheerDNS zosta³ napisany jako prosty zastêpca DNS-a nadrzêdnego, który
-mo¿e byæ u¿ywany do automatycznych aktualizacji. Ka¿dy rekord
-przechowywany jest w ma³ym pliku, dlatego te¿ aktualizacja rekordu nie
+%description -l pl.UTF-8
+SheerDNS zostaÅ‚ napisany jako prosty zastÄ™pca DNS-a nadrzÄ™dnego, ktÃ³ry
+moÅ¼e byÄ‡ uÅ¼ywany do automatycznych aktualizacji. KaÅ¼dy rekord
+przechowywany jest w maÅ‚ym pliku, dlatego teÅ¼ aktualizacja rekordu nie
 wymaga restartu procesu sheerdns.
 
 %prep
