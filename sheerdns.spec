@@ -1,12 +1,12 @@
 Summary:	SheerDNS - simple replacement master DNS
 Summary(pl.UTF-8):	SheerDNS - prosty "zastępca" DNS-a nadrzędnego
 Name:		sheerdns
-Version:	1.0.1
+Version:	1.0.3
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Source0:	http://threading.2038bug.com/sheerdns/%{name}-%{version}.tar.gz
-# Source0-md5:	abe66eabbd519e620e4679a2dabd93f1
+# Source0-md5:	08cad04e81dfec0af434803733f1a351
 Source1:	%{name}.init
 Patch0:		%{name}-dir.patch
 Patch1:		%{name}-Makefile.patch
